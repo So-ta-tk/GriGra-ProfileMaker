@@ -209,3 +209,47 @@ h2 {
         min-height: 100px;
     }
 }
+
+
+#downloadImage {
+    display: block;
+    width: 100%;
+    max-width: none;
+    min-height: 52px;
+    margin: 12px auto 0;
+
+    background: linear-gradient(135deg, #8b789e, #756783);
+    color: #ffffff;
+
+    border: none;
+    border-radius: 14px;
+    padding: 14px 24px;
+
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(117, 103, 131, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+#downloadImage:hover {
+    filter: brightness(1.08);
+    box-shadow: 0 8px 18px rgba(117, 103, 131, 0.35);
+    transform: translateY(-2px);
+}
+
+#downloadImage:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(117, 103, 131, 0.25);
+}
+
+#downloadImage:focus-visible {
+    outline: 3px solid #a99abb;
+    outline-offset: 4px;
+}
