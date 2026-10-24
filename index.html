@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&family=BIZ+UDPMincho&family=Dela+Gothic+One&family=DotGothic16&family=Hachi+Maru+Pop&family=IBM+Plex+Sans+JP&family=Kaisei+Decol&family=Kiwi+Maru&family=Klee+One&family=Kosugi&family=Kosugi+Maru&family=M+PLUS+1p&family=M+PLUS+Rounded+1c&family=Mochiy+Pop+One&family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&family=Potta+One&family=Rampart+One&family=Sawarabi+Gothic&family=Sawarabi+Mincho&family=Shippori+Antique&family=Shippori+Mincho&family=Yomogi&family=Yusei+Magic&family=Zen+Dots&family=Zen+Kaku+Gothic+New&family=Zen+Kurenaido&family=Zen+Maru+Gothic&family=Zen+Old+Mincho&display=swap" rel="stylesheet">
+
+  <title>ぐりぐらプロフメーカー</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+<body>
+  <h1>ぐりぐらプロフメーカー</h1>
+  <div class="profile-maker">
+
+    <section class="input-panel">
+        <h2>プロフィールを編集</h2>
+
+    <br><br>
+
+    <label for="name">名前</label>
+    <br>
+    <input type="text" id="name" placeholder="名前を入力">
+
+    <br>
+
+    <label for="gender">性別</label>
+    <br>
+    <input type="text" id="gender" placeholder="性別を入力">
+
+    <br>
+
+    <label for="age">年齢</label>
+    <br>
+    <input type="text" id="age" placeholder="年齢を入力">
+
+
+    <br>
+    <label for="taste">嗜好</label>
+    <br>
+    <select id="taste" multiple size="3">
+      <option value="guri">ぐり</option>
+      <option value="gura">ぐら</option>
+      <option value="both">両刀</option>
+    </select>
+
+    <br>
+    <label for="taste_rate">ぐり：ぐら</label>
+    <br>
+    <input type="number" id="guri" placeholder="ぐり" min="0" max="1000">
+    <input type="number" id="gura" placeholder="ぐら" min="0" max="1000">
+
+    <br>
+    <label for="recruit">募集</label>
+    <br>
+    <select id="recruit" multiple size="4">
+      <option value="gentle">紳士</option>
+      <option value="lady">淑女</option>
+      <option value="both">両方</option>
+      <option value="no">募集なし</option>
+    </select>
+
+    <br>
+    <label for="area">活動エリア</label>
+    <br>
+    <input type="text" id="area" placeholder="活動エリアを入力">
+
+    <br>
+    <label for="introduce">自己紹介</label>
+    <br>
+    <textarea id="introduction" rows="3"></textarea>
+
+    <br>
+  <table>
+    <tr>
+      <th>連絡手段</th>
+      <th>OK,NG等</th>
+    </tr>
+    <tr>
+      <td>LINE</td>
+      <td>
+        <select id="line">
+          <option value="Noanswer">無回答</option>
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+          <option value="仲良くなってから">仲良くなってから</option>
+          <option value="歓迎">歓迎！</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>DM</td>
+      <td>
+        <select id="dm">
+          <option value="Noanswer">無回答</option>
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+          <option value="仲良くなってから">仲良くなってから</option>
+          <option value="歓迎">歓迎！</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>インスタ</td>
+      <td>
+        <select id="insta">
+          <option value="Noanswer">無回答</option>
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+          <option value="仲良くなってから">仲良くなってから</option>
+          <option value="歓迎">歓迎！</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>イメプ</td>
+      <td>
+        <select id="meeting">
+          <option value="Noanswer">無回答</option>
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+          <option value="仲良くなってから">仲良くなってから</option>
+          <option value="歓迎">歓迎！</option>
+        </select>
+      </td>
+    </tr>
+      <tr>
+      <td>その他</td>
+      <td>
+        <select id="imagePlay">
+          <option value="Noanswer">無回答</option>
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+          <option value="仲良くなってから">仲良くなってから</option>
+          <option value="歓迎">歓迎！</option>
+        </select>
+      </td>
+    </tr>
+      <tr>
+      <td>会う</td>
+      <td>
+        <select id="other">
+          <option value="Noanswer">無回答</option>
+          <option value="OK">OK</option>
+          <option value="NG">NG</option>
+          <option value="仲良くなってから">仲良くなってから</option>
+          <option value="歓迎">歓迎！</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+    <br><br>
+    <h3>好きな部位</h3>
+      <div class="parts_list">
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="head">
+        <span>頭</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="ear">
+        <span>耳</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="neck">
+        <span>首</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="arm">
+        <span>腕</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="armpit">
+        <span>脇</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="side">
+        <span>脇腹</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="chest">
+        <span>胸</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="stomach">
+        <span>お腹</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="back">
+        <span>背中</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="thigh">
+        <span>太もも</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="hip">
+        <span>お尻</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="foot">
+        <span>足裏</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="like_parts" value="delicate">
+        <span>デリケートゾーン</span>
+      </label>
+    </div>
+
+    <br><br>
+
+    <h3>苦手な部位</h3>
+      <div class="parts_list">
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="head">
+        <span>頭</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="ear">
+        <span>耳</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="neck">
+        <span>首</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="arm">
+        <span>腕</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="armpit">
+        <span>脇</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="side">
+        <span>脇腹</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="chest">
+        <span>胸</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="stomach">
+        <span>お腹</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="back">
+        <span>背中</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="thigh">
+        <span>太もも</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="hip">
+        <span>お尻</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="foot">
+        <span>足裏</span>
+      </label>
+
+      <label class="parts_item">
+        <input type="checkbox" name="dislike_parts" value="delicate">
+        <span>デリケートゾーン</span>
+      </label>
+    </div>
+
+    <br><br>
+    <h3>好きなプレイ</h3>
+    <div class="play_situation">
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="hard">
+        <span>ハードプレイ</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="soft">
+        <span>ソフトプレイ</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="feather">
+        <span>フェザータッチ</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="blindfold">
+        <span>目隠し</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="verbal">
+        <span>言葉責め</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="lotionoil">
+        <span>ローション・オイル</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="powder">
+        <span>パウダー</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="brush">
+        <span>ブラシ</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="man_restraint">
+        <span>人力拘束</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="mental_restraint">
+        <span>精神拘束</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="revenge">
+        <span>仕返し</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="restraint">
+        <span>拘束具</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="undressing">
+        <span>脱衣</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="like_situation" value="punishment">
+        <span>罰ゲーム</span>
+      </label>
+
+    </div>
+
+
+    <br><br>
+
+    <h3>苦手なプレイ</h3>
+    <div class="play_situation">
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="hard">
+        <span>ハードプレイ</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="soft">
+        <span>ソフトプレイ</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="feather">
+        <span>フェザータッチ</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="blindfold">
+        <span>目隠し</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="verbal">
+        <span>言葉責め</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="lotionoil">
+        <span>ローション・オイル</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="powder">
+        <span>パウダー</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="brush">
+        <span>ブラシ</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="man_restraint">
+        <span>人力拘束</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="mental_restraint">
+        <span>精神拘束</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="revenge">
+        <span>仕返し</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="restraint">
+        <span>拘束具</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="undressing">
+        <span>脱衣</span>
+      </label>
+
+      <label class="play_situation_item">
+        <input type="checkbox" name="dislike_situation" value="punishment">
+        <span>罰ゲーム</span>
+      </label>
+    </div>
+    <br><br>
+
+    <label for="taste_other">プレイや部位に関してコメント</label>
+    <br>
+    <textarea id="taste_other" rows="2"></textarea>
+    <br>
+    <br>
+    <div class="color-settings">
+        <label >背景色</label>
+        <input type="color" id="bgColor" value="#756783">
+
+        <label for="textColor">文字色</label>
+        <input type="color" id="textColor" value="#756783">
+    </div>
+    <br>
+
+    <label for="fontGenre">フォントのジャンル</label>
+    <select id="fontGenre">
+        <option value="handwriting">手書き風</option>
+        <option value="business">ビジネスライク</option>
+        <option value="normal">ノーマル</option>
+        <option value="cool">かっこいい</option>
+        <option value="cute">可愛い</option>
+        <option value="quirky">奇抜</option>
+    </select>
+    <br>
+    <label for="fontSelect">フォント</label>
+    <select id="fontSelect"></select>
+
+    <br><br>
+    <button id="download">画像を保存</button>
+    </section>
+
+    <section class="preview-panel">
+        <h2>プレビュー</h2>
+
+        <div class="canvas-wrapper">
+            <canvas id="profileCanvas" width="900" height="1200"></canvas>
+        </div>
+    </section>
+
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>

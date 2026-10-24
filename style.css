@@ -1,0 +1,211 @@
+
+/* ページ全体 */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 24px;
+    background-color: #f5f2f4;
+    color: #333;
+    font-family: sans-serif;
+}
+
+/* 入力欄とプレビューを横並びにする */
+.profile-maker {
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+/* 左側：入力フォーム */
+.input-panel {
+    min-width: 0;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* 右側：プレビュー */
+.preview-panel {
+    min-width: 0;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+
+    position: sticky;
+    top: 24px;
+}
+
+/* Canvasを画面幅に合わせて縮小表示 */
+.canvas-wrapper {
+    width: 100%;
+    max-height: calc(100vh - 120px);
+    overflow: auto;
+    text-align: center;
+}
+
+#profileCanvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* 入力項目 */
+.input-panel label {
+    display: block;
+    margin: 16px 0 6px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.input-panel input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+.input-panel select,
+.input-panel textarea {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+/* タグを折り返して並べる */
+.parts_list,
+.play_situation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* タグ全体 */
+.parts_item,
+.play_situation_item {
+    display: inline-flex;
+    cursor: pointer;
+}
+
+/* チェックボックス本体を視覚的に隠す */
+.parts_item input[type="checkbox"],
+.play_situation_item input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+/* 通常時のタグ */
+.parts_item span,
+.play_situation_item span {
+    display: inline-block;
+    padding: 9px 15px;
+    border: 1px solid #ddd;
+    border-radius: 999px;
+    background-color: #fff;
+    color: #555;
+    font-size: 14px;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+/* 選択中のタグ */
+.parts_item input:checked + span,
+.play_situation_item input:checked + span {
+    background-color: #756783;
+    border-color: #756783;
+    color: #fff;
+}
+
+/* キーボード操作時のフォーカス */
+.parts_item input:focus-visible + span,
+.play_situation_item input:focus-visible + span {
+    outline: 2px solid #756783;
+    outline-offset: 3px;
+}
+.parts_list,
+.play_situation {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center;
+    gap: 8px;
+}
+
+.parts_item,
+.play_situation_item {
+    display: inline-flex !important;
+    flex: 0 0 auto;
+    width: auto !important;
+    margin: 0;
+}
+
+
+
+.input-panel input[type="color"] {
+    width: 60px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.input-panel textarea {
+    resize: vertical;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+/* 画面が狭いときは縦並び */
+/* スマホ対応 */
+@media (max-width: 600px) {
+    body {
+        padding: 8px;
+    }
+
+    .profile-maker {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .input-panel,
+    .preview-panel {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    /* プレビューはスクロール中も通常の位置に置く */
+    .preview-panel {
+        position: static;
+    }
+
+    /* 画像全体を画面幅に合わせて表示 */
+    .canvas-wrapper {
+        max-height: none;
+        overflow: visible;
+    }
+
+    #profileCanvas {
+        width: 100%;
+        height: auto;
+    }
+
+    /* 入力操作をしやすくする */
+    .input-panel input:not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+    .input-panel select,
+    .input-panel textarea {
+        min-height: 44px;
+        font-size: 16px;
+    }
+
+    .input-panel textarea {
+        min-height: 100px;
+    }
+}
