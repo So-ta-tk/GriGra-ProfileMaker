@@ -46,47 +46,10 @@ function lightenColor(color, amount = 0.4) {
         .map(v => v.toString(16).padStart(2, "0"))
         .join("")}`;
 }
-const fontGenres = {
-    handwriting: [
-        "Klee One", "Yomogi", "Zen Kurenaido", "Yuji Syuku", "Hachi Maru Pop"
-    ],
-    business: [
-        "Noto Sans JP", "BIZ UDPGothic", "Noto Serif JP", "IBM Plex Sans JP", "Zen Kaku Gothic New"
-    ],
-    normal: [
-        "M PLUS 1p", "Zen Maru Gothic"
-    ],
-    cool: [
-        "Orbitron", "Rajdhani", "Oswald", "Zen Old Mincho", "Dela Gothic One"
-    ],
-    cute: [
-        "Mochiy Pop One", "Mochiy Pop P One", "M PLUS Rounded 1c", "Kosugi Maru", "Hachi Maru Pop"
-    ],
-    quirky: [
-        "Reggae One", "RocknRoll One", "Rampart One", "Bungee", "Press Start 2P"
-    ]
-};
 
 
-const fontGenre = document.getElementById("fontGenre");
+
 const fontSelect = document.getElementById("fontSelect");
-function updateFontOptions() {
-    const fonts = fontGenres[fontGenre.value];
-
-    fontSelect.innerHTML = "";
-
-    fonts.forEach(font => {
-        const option = document.createElement("option");
-        option.value = font;
-        option.textContent = font;
-        fontSelect.appendChild(option);
-    });
-
-    // フォントの選択肢が変わったらプロフィールも再描画
-    if (typeof drawProfile === "function") {
-        drawProfile();
-    }
-}
 
 
 let drawingId = 0;
@@ -106,7 +69,7 @@ async function drawProfileWithFont() {
 
     drawProfile();
 }
-fontSelect.addEventListener("change", drawProfileWithFont);
+
 // =========================ボタンを押したときに画像を生成==================
 function drawProfile(){
 
@@ -826,8 +789,10 @@ document.querySelectorAll("input, select, textarea").forEach(element => {
 document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener("change", drawProfileWithFont);
 });
-updateFontOptions();
 drawProfileWithFont();
+fontSelect.addEventListener("change", () => {
+    drawProfile();
+});
 document.getElementById("downloadImage").addEventListener("click", function () {
     const canvas = document.getElementById("profileCanvas");
 
@@ -847,4 +812,3 @@ document.getElementById("downloadImage").addEventListener("click", function () {
         URL.revokeObjectURL(url);
     }, "image/png");
 });
-
