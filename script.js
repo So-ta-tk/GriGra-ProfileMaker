@@ -252,7 +252,8 @@ function drawProfile(){
     ctx.fillStyle = subColor;
     ctx.fillText("年齢", 80, 230);
 
-    ctx.font = `50px "${selectedFont}", sans-erif`;
+    ctx.font = `50px "${selectedFont}", ${selectedFont}`;
+    ctx.fillStyle = textColor;
     const age =document.getElementById("age").value
         ? document.getElementById("age").value 
         : "";
@@ -379,7 +380,7 @@ function drawProfile(){
                     Math.PI * 2
                 );
 
-                ctx.strokeStyle = mainColor;
+                ctx.strokeStyle = textColor;
                 ctx.lineWidth = 3;
                 ctx.stroke();
             }
@@ -464,10 +465,10 @@ function drawProfile(){
                 const size = partsPosition.fontSize * 0.35;
 
                 ctx.beginPath();
-                ctx.moveTo(centerX - size-3, y - size-3);
-                ctx.lineTo(centerX + size+6, y + size+6);
-                ctx.moveTo(centerX + size+3, y - size-3);
-                ctx.lineTo(centerX - size-6, y + size+6);
+                ctx.moveTo(centerX - size*3.5, y - size-1);
+                ctx.lineTo(centerX + size*3.5, y + size+2);
+                ctx.moveTo(centerX + size*3.5, y - size-1);
+                ctx.lineTo(centerX - size*3.5, y + size+2);
 
                 ctx.strokeStyle = `#c65b65`;
                 ctx.lineWidth = 4;
@@ -561,14 +562,14 @@ function drawProfile(){
                 const size = situPosition.fontSize * 0.35;
 
                 ctx.beginPath();
-                ctx.moveTo(centerX - size-3, y - size-3);
-                ctx.lineTo(centerX + size+6, y + size+6);
-                ctx.moveTo(centerX + size+3, y - size-3);
-                ctx.lineTo(centerX - size-6, y + size+6);
+                ctx.moveTo(centerX - size*4, y - size-3);
+                ctx.lineTo(centerX + size*4, y + size+6);
+                ctx.moveTo(centerX + size*4, y - size-3);
+                ctx.lineTo(centerX - size*4, y + size+6);
 
                 ctx.strokeStyle = `#c65b65`;
                 ctx.lineWidth = 4;
-                ctx.globalAlpha = 0.6;
+                ctx.globalAlpha = 0.7;
                 ctx.stroke();
 
                 ctx.globalAlpha = 1;
@@ -746,11 +747,11 @@ function drawProfile(){
                 } else if (mark === "✕") {
                     const size = contactPosition.fontSize * 0.35;
 
-                    ctx.beginPath();
-                    ctx.moveTo(centerX - size, y - size);
-                    ctx.lineTo(centerX + size, y + size);
-                    ctx.moveTo(centerX + size, y - size);
-                    ctx.lineTo(centerX - size, y + size);
+                ctx.beginPath();
+                ctx.moveTo(centerX - size*3, y - size-1);
+                ctx.lineTo(centerX + size*3, y + size+2);
+                ctx.moveTo(centerX + size*3, y - size-1);
+                ctx.lineTo(centerX - size*3, y + size+2);
                     ctx.stroke();
                 } else if (mark === "△") {
                     const size = contactPosition.fontSize * 0.8;
