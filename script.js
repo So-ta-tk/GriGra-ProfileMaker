@@ -88,14 +88,25 @@ function updateFontOptions() {
     }
 }
 
-fontGenre.addEventListener("change", updateFontOptions);
-fontSelect.addEventListener("change", () => {
-    if (typeof drawProfile === "function") {
-        drawProfile();
+
+let drawingId = 0;
+
+async function drawProfileWithFont() {
+    const currentId = ++drawingId;
+    const selectedFont = document.getElementById("fontSelect").value;
+
+    try {
+        await document.fonts.load(`30px "${selectedFont}"`);
+    } catch (error) {
+        console.error("フォントの読み込みに失敗しました:", error);
     }
-});
 
+    // 待っている間に別のフォントが選ばれたら、古い描画はしない
+    if (currentId !== drawingId) return;
 
+    drawProfile();
+}
+fontSelect.addEventListener("change", drawProfileWithFont);
 // =========================ボタンを押したときに画像を生成==================
 function drawProfile(){
 
@@ -240,7 +251,7 @@ function drawProfile(){
 
     ctx.fillStyle = textColor;
     const namePosition = {x:80,y:160,fontSize:75}
-    ctx.font = `bold ${namePosition.fontSize}px "${selectedFont}", sans-erif`;
+    ctx.font = `bold ${namePosition.fontSize}px "${selectedFont}", sans-serif`;
     ctx.fillText(getValue("name"),namePosition.x,namePosition.y);
     
     const namelen = countChars(getValue("name"));
@@ -273,7 +284,7 @@ function drawProfile(){
     ctx.fillStyle = subColor;
     ctx.fillText("活動エリア", 80, 340);
 
-    ctx.font = `36px "${selectedFont}", sans-erif`;
+    ctx.font = `36px "${selectedFont}", sans-seif`;
     ctx.fillStyle = textColor;
     ctx.fillText(getValue("area"), 80, 390);
 
@@ -292,11 +303,11 @@ function drawProfile(){
     ctx.fillText("ぐり  ：  ぐら", ggPosition.x,ggPosition.y);
 
     
-    ctx.font = `${ggPosition.fontSize-10}px "${selectedFont}", sans-erif`;
+    ctx.font = `${ggPosition.fontSize-10}px "${selectedFont}", sans-serif`;
     ctx.fillText(":", ggPosition.x, ggPosition.y+75);
 
     ctx.textAlign="right"
-    ctx.font = `${ggPosition.fontSize}px "${selectedFont}", sans-erif`;
+    ctx.font = `${ggPosition.fontSize}px "${selectedFont}", sans-seif`;
     ctx.fillStyle = textColor;
     ctx.fillText((document.getElementById("guri").value || "0") ,
     ggPosition.x-35,ggPosition.y+ggPosition.gap
@@ -315,7 +326,7 @@ function drawProfile(){
     ctx.fillStyle = subColor;
     ctx.fillText("性別", 300, 230);
 
-    ctx.font = `50px "${selectedFont}", sans-erif`;
+    ctx.font = `50px "${selectedFont}", sans-seif`;
     ctx.fillStyle = textColor;
     ctx.fillText(getValue("gender") || "",350,280);
 
@@ -607,7 +618,7 @@ function drawProfile(){
         lineHeight: 35
     };
 
-    ctx.font = `${tastePosition.fontSize}px "${selectedFont}", sans-erif`;
+    ctx.font = `${tastePosition.fontSize}px "${selectedFont}", sans-seif`;
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
     ctx.fillStyle = textColor;
@@ -640,7 +651,7 @@ function drawProfile(){
         lineHeight: 40
     };
 
-    ctx.font = `${selfintPosition.fontSize}px "${selectedFont}", sans-erif`;
+    ctx.font = `${selfintPosition.fontSize}px "${selectedFont}", sans-seif`;
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
 
@@ -799,16 +810,41 @@ function drawProfile(){
     ctx.fillText("製作： そーた @m0NoGpl3ok72873",450,1182);
     ctx.textAlign ="left"
 }
-document.querySelectorAll("input, select, textarea").forEach(element => {
-    if (element.id === "generate") return;
 
-    element.addEventListener("input", drawProfile);
-    element.addEventListener("change", drawProfile);
-});
 document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener("change", () => {
         drawProfile();
     });
 });
+document.querySelectorAll("input, select, textarea").forEach(element => {
+    if (element.id === "generate" || element.id === "fontSelect") return;
+
+    element.addEventListener("input", drawProfileWithFont);
+    element.addEventListener("change", drawProfileWithFont);
+});
+
+document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener("change", drawProfileWithFont);
+});
 updateFontOptions();
+drawProfileWithFont();
+document.getElementById("downloadImage").addEventListener("click", function () {
+    const canvas = document.getElementById("profileCanvas");
+
+    canvas.toBlob(function (blob) {
+        if (!blob) {
+            alert("画像の作成に失敗しました。");
+            return;
+        }
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "ぐりぐらプロフィール.png";
+        link.click();
+
+        URL.revokeObjectURL(url);
+    }, "image/png");
+});
 
