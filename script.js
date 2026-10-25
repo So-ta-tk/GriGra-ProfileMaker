@@ -214,7 +214,7 @@ function drawProfile(){
 
     ctx.fillStyle = textColor;
     const namePosition = {x:80,y:160,fontSize:75}
-    ctx.font = `bold ${namePosition.fontSize}px "${selectedFont}", sans-serif`;
+    ctx.font = `bold ${namePosition.fontSize}px "${selectedFont}"`;
     ctx.fillText(getValue("name"),namePosition.x,namePosition.y);
     
     const namelen = countChars(getValue("name"));
@@ -802,13 +802,104 @@ document.getElementById("downloadImage").addEventListener("click", function () {
             return;
         }
 
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
+        const fileName = "ぐりぐらプロフィール.png";
 
-        link.href = url;
-        link.download = "ぐりぐらプロフィール.png";
-        link.click();
+        // 通常のダウンロード（PC・共有できない環境用）
+        function downloadFallback() {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
 
-        URL.revokeObjectURL(url);
+            link.href = url;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+        }
+
+        // スマホ(タッチ端末)では共有メニューを開く → 「画像を保存」で写真に保存できる
+        const isTouch = window.matchMedia("(pointer: coarse)").matches;
+        const file = new File([blob], fileName, { type: "image/png" });
+
+        if (isTouch && navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({ files: [file] }).catch(error => {
+                // 共有をキャンセルしただけなら何もしない
+                if (error.name !== "AbortError") {
+                    downloadFallback();
+                }
+            });
+        } else {
+            downloadFallback();
+        }
     }, "image/png");
+});
+
+// ===== フォント選択：各フォントの見本ボタンを作る =====
+(function buildFontPicker() {
+    const picker = document.getElementById("fontPicker");
+    if (!picker) return;
+
+    function updateSelected() {
+        picker.querySelectorAll(".font-chip").forEach(chip => {
+            const selected = chip.dataset.font === fontSelect.value;
+            chip.classList.toggle("is-selected", selected);
+            chip.setAttribute("aria-selected", selected);
+        });
+    }
+
+    fontSelect.querySelectorAll("optgroup").forEach(group => {
+        const title = document.createElement("div");
+        title.className = "font-group-title";
+        title.textContent = group.label;
+        picker.appendChild(title);
+
+        const list = document.createElement("div");
+        list.className = "font-group";
+
+        group.querySelectorAll("option").forEach(option => {
+            const chip = document.createElement("button");
+            chip.type = "button";
+            chip.className = "font-chip";
+            chip.dataset.font = option.value;
+            chip.setAttribute("role", "option");
+
+            const sample = document.createElement("span");
+            sample.className = "font-sample";
+            sample.style.fontFamily = `"${option.value}", sans-serif`;
+            sample.textContent = "あいう Abc";
+
+            const name = document.createElement("span");
+            name.className = "font-name";
+            name.textContent = option.textContent;
+
+            chip.append(sample, name);
+            chip.addEventListener("click", () => {
+                fontSelect.value = option.value;
+                updateSelected();
+                drawProfileWithFont(); // フォント読み込みを待ってから再描画
+            });
+
+            list.appendChild(chip);
+        });
+
+        picker.appendChild(list);
+    });
+
+    updateSelected();
+})();
+
+// ===== スマホ用：編集 / プレビュー の切り替え =====
+document.body.dataset.view = "edit";
+
+document.querySelectorAll(".mobile-tab").forEach(button => {
+    button.addEventListener("click", () => {
+        document.body.dataset.view = button.dataset.view;
+
+        document.querySelectorAll(".mobile-tab").forEach(tab => {
+            tab.classList.toggle("is-active", tab === button);
+        });
+
+        window.scrollTo({ top: 0 });
+    });
 });

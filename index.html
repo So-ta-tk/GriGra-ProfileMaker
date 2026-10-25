@@ -6,7 +6,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&family=BIZ+UDPMincho&family=Dela+Gothic+One&family=DotGothic16&family=Hachi+Maru+Pop&family=IBM+Plex+Sans+JP&family=Kaisei+Decol&family=Kiwi+Maru&family=Klee+One&family=Kosugi&family=Kosugi+Maru&family=M+PLUS+1p&family=M+PLUS+Rounded+1c&family=Mochiy+Pop+One&family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&family=Potta+One&family=Rampart+One&family=Sawarabi+Gothic&family=Sawarabi+Mincho&family=Shippori+Antique&family=Shippori+Mincho&family=Yomogi&family=Yusei+Magic&family=Zen+Dots&family=Zen+Kaku+Gothic+New&family=Zen+Kurenaido&family=Zen+Maru+Gothic&family=Zen+Old+Mincho&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic&family=BIZ+UDPMincho&family=Dela+Gothic+One&family=DotGothic16&family=Hachi+Maru+Pop&family=IBM+Plex+Sans+JP&family=Kaisei+Decol&family=Kiwi+Maru&family=Klee+One&family=Kosugi&family=Kosugi+Maru&family=M+PLUS+1p&family=M+PLUS+Rounded+1c&family=Mochiy+Pop+One&family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&family=Potta+One&family=Rampart+One&family=Sawarabi+Gothic&family=Sawarabi+Mincho&family=Shippori+Antique&family=Shippori+Mincho&family=Yomogi&family=Yusei+Magic&family=Zen+Dots&family=Zen+Kaku+Gothic+New&family=Zen+Kurenaido&family=Zen+Maru+Gothic&family=Zen+Old+Mincho&family=Yuji+Syuku&family=Orbitron&family=Rajdhani&family=Oswald&family=Reggae+One&family=RocknRoll+One&family=Bungee&family=Press+Start+2P&family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
 
   <title>ぐりぐらプロフメーカー</title>
   <link rel="stylesheet" href="style.css">
@@ -14,6 +14,13 @@
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 <body>
   <h1>ぐりぐらプロフメーカー</h1>
+
+  <!-- スマホ用：編集 / プレビュー切り替え（画面下に固定） -->
+  <nav class="mobile-tabs" aria-label="表示切り替え">
+    <button type="button" class="mobile-tab is-active" data-view="edit">✎ 編集</button>
+    <button type="button" class="mobile-tab" data-view="preview">▣ プレビュー・保存</button>
+  </nav>
+
   <div class="profile-maker">
 
     <section class="input-panel">
@@ -74,7 +81,7 @@
       <textarea id="introduction" rows="3"></textarea>
 
       <br>
-    <table>
+    <table class="contact-table">
       <tr>
         <th>連絡手段</th>
         <th>OK,NG等</th>
@@ -449,17 +456,8 @@
       <textarea id="taste_other" rows="2"></textarea>
       <br>
       <br>
-      <div class="color-settings">
-          <label >背景色</label>
-          <input type="color" id="bgColor" value="#756783">
-
-          <label for="textColor">文字色</label>
-          <input type="color" id="textColor" value="#756783">
-      </div>
-      <br>
-
-      <label for="fontSelect">フォント</label>
-<select id="fontSelect">
+<!-- 色・フォントはプレビュー側で変更します（fontSelectは内部用に非表示で保持） -->
+<select id="fontSelect" hidden>
     <optgroup label="手書き風">
         <option value="Klee One">Klee One</option>
         <option value="Yomogi">Yomogi</option>
@@ -503,8 +501,9 @@
         <option value="Bungee">Bungee</option>
         <option value="Press Start 2P">Press Start 2P</option>
     </optgroup>
-</select>
-    </section>
+  </select>
+  </section>
+
   <section class="preview-panel">
     <h2>プレビュー</h2>
 
@@ -512,11 +511,29 @@
         <canvas id="profileCanvas" width="900" height="1200"></canvas>
     </div>
 
+    <!-- 色・フォント設定（プレビューを見ながら変更） -->
+    <div class="design-settings">
+      <div class="color-settings">
+        <div class="color-item">
+          <label for="bgColor">背景色</label>
+          <input type="color" id="bgColor" value="#756783">
+        </div>
+        <div class="color-item">
+          <label for="textColor">文字色</label>
+          <input type="color" id="textColor" value="#756783">
+        </div>
+      </div>
+
+      <div class="font-picker-label">フォント</div>
+      <div id="fontPicker" class="font-picker" role="listbox" aria-label="フォント選択"></div>
+    </div>
+
     <!-- プレビューの直下に配置 -->
     <button id="downloadImage" type="button">
         <span class="download-icon">↓</span>
-        画像をダウンロード
+        画像を保存
     </button>
+    <p class="save-hint">※スマホでは「画像を保存」で共有メニューが開きます。うまく保存できない場合は、プレビューを長押しして保存してください。</p>
   </section>
 
   
