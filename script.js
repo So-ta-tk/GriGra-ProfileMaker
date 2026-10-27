@@ -69,7 +69,20 @@ async function drawProfileWithFont() {
 
     drawProfile();
 }
-
+function wrapText(str, max = 18) {
+  return str
+    .split("\n")                         // 元の改行ごとに分ける
+    .map(line => {
+      const chars = [...line];           // 絵文字も1文字として数える
+      const parts = [];
+      for (let i = 0; i < chars.length; i += max) {
+        parts.push(chars.slice(i, i + max).join(""));
+      }
+      return parts.length ? parts.join("\n") : "";  // 空行は空のまま
+    })
+    .join("\n");
+    
+}
 // =========================ボタンを押したときに画像を生成==================
 function drawProfile(){
 
@@ -595,7 +608,10 @@ function drawProfile(){
     });
 
     //自己紹介----------------------------------------------------
-    const selfIntro = document.getElementById("introduction").value;
+    const selfIntro_base = document.getElementById("introduction").value;
+
+    const selfIntro = wrapText(selfIntro_base);
+
     const lines = selfIntro.split("\n");
 
     const lineCount = selfIntro.split("\n").length;
