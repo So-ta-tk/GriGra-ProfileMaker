@@ -13,7 +13,17 @@
 </head>
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 <body>
-  <h1>ぐりぐらプロフメーカー</h1>
+  <header class="site-header">
+    <h1>ぐりぐらプロフメーカー</h1>
+    <button type="button" id="thanksBtn" class="thanks-btn">ご意見いただいた方々</button>
+  </header>
+
+  <dialog id="thanksDialog" class="thanks-dialog">
+    <h2>ご意見をくれた方々</h2>
+    <p class="thanks-note">改善のアイデアをくださった皆さま、ありがとうございます！</p>
+    <ul id="thanksList" class="thanks-list"></ul>
+    <button type="button" id="thanksClose" class="thanks-close">閉じる</button>
+  </dialog>
 
   <!-- スマホ用：編集 / プレビュー切り替え（画面下に固定） -->
   <nav class="mobile-tabs" aria-label="表示切り替え">
@@ -43,7 +53,7 @@
       <label for="age">年齢</label>
       <br>
       <input type="text" id="age" placeholder="年齢を入力">
-
+      
       <br>
       <label for="taste_rate">ぐり：ぐら</label>
       <br>
@@ -517,9 +527,8 @@
       <div class="font-picker-label">フォント</div>
       <div id="fontPicker" class="font-picker" role="listbox" aria-label="フォント選択"></div>
     </div>
-      <p class="save-hint">※フォントを変更しても反映されないことがあります。
+    <p class="save-hint">※フォントを変更しても反映されないことがあります。
       何度か変更し直すとうまくいきます</p>
-    
 
     <!-- プレビューの直下に配置 -->
     <button id="downloadImage" type="button">
