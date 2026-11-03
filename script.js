@@ -919,3 +919,43 @@ document.querySelectorAll(".mobile-tab").forEach(button => {
         window.scrollTo({ top: 0 });
     });
 });
+// ===== ご意見をくれた方々 =====　/// # thanks
+(function setupThanks() {
+    // ここに追加していく（xid は @ なしで書く）
+    const contributors = [
+        { name: "れー｜くすぐり さん", xid: "ray_tkl" },
+        { name: "Rio さん", xid: "gBL9IOForW33685" },
+    ];
+
+    const dialog = document.getElementById("thanksDialog");
+    const list = document.getElementById("thanksList");
+    if (!dialog || !list) return;
+
+    contributors.forEach(person => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `https://x.com/${encodeURIComponent(person.xid)}`;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+
+        const name = document.createElement("span");
+        name.className = "t-name";
+        name.textContent = person.name;
+
+        const id = document.createElement("span");
+        id.className = "t-id";
+        id.textContent = `@${person.xid}`;
+
+        a.append(name, id);
+        li.appendChild(a);
+        list.appendChild(li);
+    });
+
+    document.getElementById("thanksBtn").addEventListener("click", () => dialog.showModal());
+    document.getElementById("thanksClose").addEventListener("click", () => dialog.close());
+
+    // 背景（ポップアップの外側）をタップしても閉じる
+    dialog.addEventListener("click", e => {
+        if (e.target === dialog) dialog.close();
+    });
+})();
