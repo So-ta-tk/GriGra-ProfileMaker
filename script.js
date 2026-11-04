@@ -923,7 +923,7 @@ document.querySelectorAll(".mobile-tab").forEach(button => {
 (function setupThanks() {
     // ここに追加していく（xid は @ なしで書く）
     const contributors = [
-        { name: "れー｜くすぐり さん", xid: "ray_tkl" },
+        { name: "れー さん", xid: "ray_tkl" },
         { name: "Rio さん", xid: "gBL9IOForW33685" },
     ];
 
