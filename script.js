@@ -786,7 +786,7 @@ function drawProfile(){
     ctx.fillStyle ="#0b0b0b4c";
     ctx.textAlign ="center";
     ctx.font = " 20px sans-serif";
-    ctx.fillText("製作： そーた @m0NoGpl3ok72873",450,1182);
+    ctx.fillText("製作： そーた @sugoku_pidahan,450,1182);
     ctx.textAlign ="left"
 }
 
